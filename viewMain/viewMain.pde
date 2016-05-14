@@ -14,7 +14,7 @@
     }
     
     public void update() {
-      graphics.updatePosition();
+      
     }
      
     public void draw() {
@@ -23,9 +23,7 @@
       
       background( 0 );
       
-      image( graphics.getPictureToDisplay( 0 ), graphics.getPosition(), 25 );
-      image( graphics.getPictureToDisplay( 1 ), graphics.getPosition() + 550, 25 );
-      image( graphics.getPictureToDisplay( 2 ), graphics.getPosition() + 1100, 25 );
+      image( graphics.getPictureToDisplay(), 125, 25 );
      
       for ( int i = 0; i < 600; i += 4 )
         line( 0, i, 800, i );
