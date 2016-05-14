@@ -6,6 +6,7 @@
 
     private PFont Apple = null;
     private String myText = "Voyage voyage";
+    private int frameCursor = 0;
     
     public void setup() {
       
@@ -22,12 +23,16 @@
       printArray(PFont.list());
       Apple = createFont("../ressources/Apple.ttf", 24);
       textFont(Apple);
-      textAlign(CENTER, CENTER);  
+      textAlign(LEFT, CENTER);  
 
     }
     
     public void update() {
       graphics.update();
+      
+      frameCursor++;
+      if(frameCursor>32)
+        frameCursor = 0;
     }
      
     public void draw() {
@@ -54,7 +59,11 @@
         line( 0, i, 800, i );
       
       fill( 220, 200, 255 );
-      text(myText, 0, 0, width, height);
+      if(frameCursor<=16){
+        text(myText+"|", 0, 0, width, height);
+      } else{
+        text(myText, 0, 0, width, height);
+      }
       
     }
     
