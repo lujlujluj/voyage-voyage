@@ -1,10 +1,10 @@
         
     
-    final class Parser {
+    final class InstagramParser {
       
       private String[] picturesURL;
       
-      public Parser() {
+      public InstagramParser() {
         loadLastPictures();
       }
       

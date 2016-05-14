@@ -1,26 +1,27 @@
     
     
-    private Parser parser;
+    private InstagramParser instagramParser;
+    private TwitterParser twitterParser;
     private Graphics graphics;
     private UserInput userinput;
 
     private PFont Apple = null;
-    private String myText = "Voyage voyage";
+    private String myText = "Paris";
     private int frameCursor = 0;
     
     public void setup() {
       
       size( 800, 600 );
       
-      parser = new Parser();
+      instagramParser = new InstagramParser();
+      twitterParser = new TwitterParser();
       graphics = new Graphics();
       userinput = new UserInput();
       
       stroke( 60, 100 );
       noCursor();
       
-      // Create font 
-      printArray(PFont.list());
+      // Create font
       Apple = createFont("../ressources/Apple.ttf", 24);
       textFont(Apple);
       textAlign(LEFT, CENTER);  
@@ -59,11 +60,13 @@
         line( 0, i, 800, i );
       
       fill( 220, 200, 255 );
-      if(frameCursor<=16){
+      /*if(frameCursor<=16){
         text(myText+"|", 0, 0, width, height);
       } else{
         text(myText, 0, 0, width, height);
-      }
+      }*/
+      
+      text(twitterParser.getTweet(0), 0, 0, width, height);
       
     }
     

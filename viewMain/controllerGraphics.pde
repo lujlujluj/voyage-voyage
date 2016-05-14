@@ -32,7 +32,7 @@
       
       private void loadNewPicture() {
         
-        String pictureURL = parser.getPictureURL( nextPictureIndex );
+        String pictureURL = instagramParser.getPictureURL( nextPictureIndex );
         println( pictureURL );
         
         PImage tmp = loadImage( pictureURL, "jpg" );
@@ -52,7 +52,7 @@
 
       public void displayRT() {
         
-        parser.loadNewPictures();
+        instagramParser.loadNewPictures();
         nextPictureIndex = 1;
         nbRectsToDisplay = 0;
         loadNewPicture();
