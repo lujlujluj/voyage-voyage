@@ -4,6 +4,7 @@
       
       private PImage pictureToDisplay;
       private int nextPictureIndex = 1;
+      private int nbRectsToDisplay = 0;
      
       public Graphics() {
         loadNewPicture();
@@ -11,6 +12,22 @@
       
       public PImage getPictureToDisplay() {
          return pictureToDisplay;
+      }
+      
+      public int getNbRectsToDisplay() {
+        return nbRectsToDisplay; 
+      }
+      
+      public void update() {
+         
+        nbRectsToDisplay += 5;
+        if ( nbRectsToDisplay > 1980 ) {
+          
+          nbRectsToDisplay = 0;
+          loadNewPicture();
+        
+        }
+        
       }
       
       private void loadNewPicture() {
@@ -26,7 +43,9 @@
         pictureToDisplay.resize( 550, 550 );
         
         nextPictureIndex++;
-        if ( nextPictureIndex > 10 )
+        if ( nextPictureIndex == 5 )
+          nextPictureIndex = 6;
+        if ( nextPictureIndex > 11 )
           nextPictureIndex = 1;
         
       }
@@ -35,6 +54,7 @@
         
         parser.loadNewPictures();
         nextPictureIndex = 1;
+        nbRectsToDisplay = 0;
         loadNewPicture();
         
       }
