@@ -5,9 +5,11 @@
       private String[] picturesURL;
       
       public Parser() {
-       
         loadLastPictures();
-        
+      }
+      
+      public void loadNewPictures() {
+        loadLastPictures();
       }
       
       public String getPictureURL( int indexOfPicture ) {
@@ -18,7 +20,7 @@
      
       private void loadLastPictures() {
     
-        String lines[] = loadStrings( "http://iconosquare.com/tag/paris" );
+        String lines[] = loadStrings( "http://iconosquare.com/tag/" + myText);
         println( "there are " + lines.length + " lines" );
       
         String[][] m = matchAll( join( lines, "" ), "image-wrapper.*?src=\"(.*?)\"" );
@@ -49,5 +51,4 @@
       }
       
     }
-    
     

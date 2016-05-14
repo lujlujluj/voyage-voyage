@@ -1,7 +1,11 @@
     
     
     private Parser parser;
-    private Graphics graphics; 
+    private Graphics graphics;
+    private UserInput userinput;
+
+    private PFont Apple = null;
+    private String myText = "Voyage voyage";
     
     public void setup() {
       
@@ -10,12 +14,20 @@
       
       parser = new Parser();
       graphics = new Graphics();
+      userinput = new UserInput();
+      
+      stroke( 60, 100 );
+      noCursor();
+      
+      //Create font 
+      printArray(PFont.list());
+      Apple = createFont("../ressources/Apple.ttf", 24);
+      textFont(Apple);
+      textAlign(CENTER, CENTER);  
       
     }
     
-    public void update() {
-      
-    }
+    public void update() {}
      
     public void draw() {
       
@@ -27,7 +39,13 @@
      
       for ( int i = 0; i < 600; i += 4 )
         line( 0, i, 800, i );
+        
+      text(myText, 0, 0, width, height);
       
+    }
+    
+    public void keyPressed() {
+      userinput.textinput();
     }
     
     

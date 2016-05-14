@@ -30,6 +30,14 @@
           nextPictureIndex = 1;
         
       }
+
+      public void displayRT() {
+        
+        parser.loadNewPictures();
+        nextPictureIndex = 1;
+        loadNewPicture();
+        
+      }
      
       private void downsampling() {
   
