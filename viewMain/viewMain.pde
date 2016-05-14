@@ -1,34 +1,31 @@
     
-      
-    private Parser parser = new Parser();
-    private Graphics graphics = new Graphics();
     
-    private PImage img = null, mask = null;
-    
+    private Parser parser;
+    private Graphics graphics; 
     
     public void setup() {
       
-      size( 800, 600 );
-    
-      String pictureURL = parser.getPictureURL( 1 );
-      println( pictureURL );
-      
-      PImage tmp = loadImage( pictureURL, "jpg" );
-      img = new PImage( 600, 600 );
-      img.copy( tmp, 0, 0, tmp.width, tmp.height, 0, 0, 600, 600 );
-      
-      img = graphics.downsampling( img );
-      img.resize( 550, 550 );
-      
+      size( 800, 600 );     
       stroke( 60, 100 );
       
+      parser = new Parser();
+      graphics = new Graphics();
+      
+    }
+    
+    public void update() {
+      graphics.updatePosition();
     }
      
     public void draw() {
       
+      update();
+      
       background( 0 );
       
-      image( img, 125, 25 );
+      image( graphics.getPictureToDisplay( 0 ), graphics.getPosition(), 25 );
+      image( graphics.getPictureToDisplay( 1 ), graphics.getPosition() + 550, 25 );
+      image( graphics.getPictureToDisplay( 2 ), graphics.getPosition() + 1100, 25 );
      
       for ( int i = 0; i < 600; i += 4 )
         line( 0, i, 800, i );
