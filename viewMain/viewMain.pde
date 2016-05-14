@@ -8,9 +8,9 @@
     
     public void setup() {
       
-      size(800, 600);
+      size( 800, 600 );
     
-      String pictureURL = parser.loadLastPicture();
+      String pictureURL = parser.getPictureURL( 1 );
       println( pictureURL );
       
       PImage tmp = loadImage( pictureURL, "jpg" );
