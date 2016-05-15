@@ -20,7 +20,7 @@
           
           text( controller.getInputTextToDisplay(), 100, 380 ); // Affichage de l'entrée clavier
           
-          text( "Press q to escape", 100, 480 ); // Autre notice textuelle
+          text( "Hit Enter to begin. Press q to escape", 100, 480 ); // Autre notice textuelle
           
         }
         

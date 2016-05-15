@@ -5,6 +5,9 @@
     private ViewResults results;
     
     private PFont font; // Police d'affichage
+private float line1 = height/2; // Paramètres bruit image
+    private float line2 = height/2;
+    private float line3 = height/2;
     
     private Screen currentScreen = Screen.MENU; // Écran courant
     
@@ -42,6 +45,24 @@
           break;
           
       }
+      
+      stroke( 60, 60 );
+      strokeWeight(10);
+      line(0, line1, width, line1);
+      line(0, line2+60, width, line2+60);
+      line(0, line3+120, width, line3+120);
+       line1 = line1 - 8;
+       if (line1 < 0) { 
+         line1 = height; 
+       }
+       line2 = line2 - 12;
+       if (line2 < 0) { 
+         line2 = height; 
+       }
+       line3 = line3 - 45;
+       if (line3 < 0) { 
+         line3 = height; 
+       }
       
       strokeWeight( 1 );
       stroke( 60, 100 ); // Afficher les lignes sur l'écran
