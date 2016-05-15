@@ -3,37 +3,48 @@
     private InstagramParser instagramParser;
     private TwitterParser twitterParser;
     private Graphics graphics;
-    private UserInput userinput;
+    //private UserInput userinput;
+    private ControllerMenu controllerMenu;
+    private ControllerResults controllerResult;
+    private Result result;
+    private Menu menu;
+    
 
     private PFont Apple = null;
-    private String myText = "Paris";
+    private String inputText = "";
     private int frameCursor = 0;
+    
+    public Boolean screen = true; //true -> menu screen  , false --> result screen
     
     public void setup() {
       
       size( 800, 600 );
       
-      instagramParser = new InstagramParser();
-      twitterParser = new TwitterParser();
-      graphics = new Graphics();
-      userinput = new UserInput();
+      result = new Result();
+      menu = new Menu();
+      controllerResult = new ControllerResults();
+      controllerMenu = new ControllerMenu();
       
       stroke( 60, 100 );
       noCursor();
       
       // Create font
-      Apple = createFont("../ressources/Apple.ttf", 24);
+      Apple = createFont("../ressources/Apple.ttf", 16);
       textFont(Apple);
       textAlign(LEFT, CENTER);  
 
     }
     
     public void update() {
-      graphics.update();
-      
-      frameCursor++;
-      if(frameCursor>32)
+      if (screen == false){
+        controllerResult.update();
+      }
+     
+      else{
+        frameCursor++;
+        if(frameCursor>32)
         frameCursor = 0;
+      }
     }
      
     public void draw() {
@@ -42,36 +53,23 @@
       
       background( 0 );
       
-      image( graphics.getPictureToDisplay(), 125, 25 );
-
-      noStroke();
-      fill( 0 );
-      int k = 0;
-      for ( int j = 25; j < 575; j += 15 ) {
-        for ( int i = 125; i < 675; i += 10 ) {
-          if ( k >= graphics.getNbRectsToDisplay() )
-            rect( i, j, 10, 15 );
-          k++;
-        }
+      if (screen == true){
+        menu.displayMenu();
       }
-      
-      stroke( 60, 100 );
-      for ( int i = 0; i < 600; i += 4 )
-        line( 0, i, 800, i );
-      
-      fill( 220, 200, 255 );
-      /*if(frameCursor<=16){
-        text(myText+"|", 0, 0, width, height);
-      } else{
-        text(myText, 0, 0, width, height);
-      }*/
-      
-      text(twitterParser.getTweet(0), 0, 0, width, height);
+          
+      else{
+        result.displayResult();
+      }
       
     }
     
     public void keyPressed() {
-      userinput.textinput();
+      if (screen == true){
+        controllerMenu.textinput();
+      } 
+      else{
+        controllerResult.textinput();
+      }
     }
     
     

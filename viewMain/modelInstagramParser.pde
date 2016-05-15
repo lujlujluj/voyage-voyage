@@ -20,7 +20,7 @@
      
       private void loadLastPictures() {
     
-        String lines[] = loadStrings( "http://iconosquare.com/tag/" + myText);
+        String lines[] = loadStrings( "http://iconosquare.com/tag/" + inputText);
         println( "there are " + lines.length + " lines" );
       
         String[][] m = matchAll( join( lines, "" ), "image-wrapper.*?src=\"(.*?)\"" );

@@ -20,7 +20,7 @@
      
       private void loadLastTweets() {
     
-        String lines[] = loadStrings( "https://twitter.com/search?f=users&q=" + myText );
+        String lines[] = loadStrings( "https://twitter.com/search?f=users&q=" + inputText );
         println( "there are " + lines.length + " lines" );
         
         String[] m = match( join( lines, "" ), "js-action-profile-name\" href=\"/(.*?)\"" );
