@@ -1,34 +1,22 @@
         
     
-    final class TwitterParser {
+    final class ModelTwitterParser {
       
-      private String[] tweets;
-      
-      public TwitterParser() {
-        loadLastTweets();
-      }
-      
-      public void loadNewTweets() {
-        loadLastTweets();
-      }
+      private String[] tweets; // Les tweets récupérés
       
       public String getTweet( int indexOfTweet ) {
-       
         return tweets[indexOfTweet];
-        
       }
-     
-      private void loadLastTweets() {
-    
-        String lines[] = loadStrings( "https://twitter.com/search?f=users&q=" + inputText );
-        println( "there are " + lines.length + " lines" );
+  
+      public void loadNewTweetsForTag( String inputTag ) {
         
+        // On cherche le premier compte twitter selon un hashtag
+        String lines[] = loadStrings( "https://twitter.com/search?f=users&q=" + inputTag );
         String[] m = match( join( lines, "" ), "js-action-profile-name\" href=\"/(.*?)\"" );
-
-        String lines2[] = loadStrings( "https://twitter.com/" + m[1] );
-        println( "there are " + lines2.length + " lines" );
         
-        String[][] m2 = matchAll( join( lines2, "" ), "data-aria-label-part=\"0\">(.*?)<a href=\"https.*?\" rel=\"nofollow\"" );
+        // On récupère les derniers tweets du compte
+        String lines2[] = loadStrings( "https://twitter.com/" + m[1] );
+        String[][] m2 = matchAll( join( lines2, "" ), "data-aria-label-part=\"0\">(.*?)(<a href=\"https.*?\" rel=\"nofollow\"|</p>)" );
         
         if ( m2 == null ) {
       
@@ -39,8 +27,9 @@
           println( m2.length + " tweet(s) récupéré(s)." );
           
           tweets = new String[m2.length];
-      
-          for ( int i = 0; i < m.length; i++ ) {
+          
+          // On garde uniquement le contenu du tweet en dehors des balises HTML
+          for ( int i = 0; i < m2.length; i++ ) {
             
             boolean dontCopy = false;
             tweets[i] = "";

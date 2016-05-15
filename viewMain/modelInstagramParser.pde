@@ -1,28 +1,17 @@
         
     
-    final class InstagramParser {
+    final class ModelInstagramParser {
       
       private String[] picturesURL;
       
-      public InstagramParser() {
-        loadLastPictures();
-      }
-      
-      public void loadNewPictures() {
-        loadLastPictures();
-      }
-      
       public String getPictureURL( int indexOfPicture ) {
-       
         return picturesURL[indexOfPicture];
-        
       }
-     
-      private void loadLastPictures() {
-    
-        String lines[] = loadStrings( "http://iconosquare.com/tag/" + inputText);
-        println( "there are " + lines.length + " lines" );
       
+      public void loadNewPicturesForTag( String inputTag ) {
+        
+        // On récupère les dernières photos selon le hashtag
+        String lines[] = loadStrings( "http://iconosquare.com/tag/" + inputTag );
         String[][] m = matchAll( join( lines, "" ), "image-wrapper.*?src=\"(.*?)\"" );
       
         if ( m == null ) {
@@ -34,7 +23,8 @@
           println( m.length + " URLs récupérée(s)." );
           
           picturesURL = new String[m.length];
-      
+          
+          // On récupère l'URL des images en plus haute résolution
           for ( int i = 0; i < m.length; i++ ) {
       
             String[] m2 = match( m[i][1], "(.*)s150x150/(.*)" );

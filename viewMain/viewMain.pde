@@ -1,75 +1,73 @@
-    
-    
-    private InstagramParser instagramParser;
-    private TwitterParser twitterParser;
-    private Graphics graphics;
-    //private UserInput userinput;
-    private ControllerMenu controllerMenu;
-    private ControllerResults controllerResult;
-    private Result result;
-    private Menu menu;
-    
 
-    private PFont Apple = null;
-    private String inputText = "";
-    private int frameCursor = 0;
     
-    public Boolean screen = true; //true -> menu screen  , false --> result screen
+    private ViewMenu menu; // Références sur les vues
+    private ViewLoading loading;
+    private ViewResults results;
+    
+    private PFont font; // Police d'affichage
+    
+    private Screen currentScreen = Screen.MENU; // Écran courant
+    
     
     public void setup() {
-      
-      size( 800, 600 );
-      
-      result = new Result();
-      menu = new Menu();
-      controllerResult = new ControllerResults();
-      controllerMenu = new ControllerMenu();
-      
-      stroke( 60, 100 );
+     
+      size( 800, 600 ); // Configuration fenêtre
       noCursor();
       
-      // Create font
-      Apple = createFont("../ressources/Apple.ttf", 16);
-      textFont(Apple);
-      textAlign(LEFT, CENTER);  
-
+      menu = new ViewMenu(); // On instancie les vues
+      loading = new ViewLoading();
+      results = new ViewResults();
+      
+      font = createFont( "../data/apple.ttf", 16 ); // Charger la police
+      textFont( font );
+      
     }
     
-    public void update() {
-      if (screen == false){
-        controllerResult.update();
-      }
-     
-      else{
-        frameCursor++;
-        if(frameCursor>32)
-        frameCursor = 0;
-      }
-    }
-     
     public void draw() {
       
-      update();
-      
-      background( 0 );
-      
-      if (screen == true){
-        menu.displayMenu();
-      }
+      background( 0 ); // Effacer le contenu la fenêtre
+       
+      switch( currentScreen ) { // Afficher l'écran courant
+        
+        case MENU:
+          menu.display();
+          break;
+
+        case LOADING:
+          loading.display();
+          break;
+
+        case RESULTS:
+          results.display();
+          break;
           
-      else{
-        result.displayResult();
       }
+      
+      strokeWeight( 1 );
+      stroke( 60, 100 ); // Afficher les lignes sur l'écran
+      for ( int i = 0; i < height; i += 4 )
+        line( 0, i, width, i );
       
     }
     
     public void keyPressed() {
-      if (screen == true){
-        controllerMenu.textinput();
-      } 
-      else{
-        controllerResult.textinput();
+     
+       switch( currentScreen ) { // Traiter les entrées clavier pour la vue courante
+        
+        case MENU:
+          menu.input();
+          break;
+
+        case LOADING:
+          loading.input();
+          break;
+
+        case RESULTS:
+          results.input();
+          break;
+          
       }
+      
     }
     
     
