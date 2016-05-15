@@ -25,7 +25,7 @@
       public void loadDataForTag( String inputTag ) {
         
         youtubeParser.loadNewSongForTag( inputTag ); // Charger un nouveau morçeau selon le hashtag entré par l'utilisateur
-        link( youtubeParser.getSongURL() ); // Jouer la musique
+        //link( youtubeParser.getSongURL() ); // Jouer la musique
         
         new ThreadLoadData( inputTag ).start(); // Démarrer un nouveau thread pour charger les données distantes
         

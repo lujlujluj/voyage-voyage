@@ -3,22 +3,28 @@
     final class ControllerMenu {
       
       private String inputText; // Texte entré par l'utilisateur
-      private PImage imageLogo; // Image du logo
-      private int frameCursor; // Compteur de frames pour le curseur de texte
+      private PImage imageLogo, imageLogo2; // Image du logo
+      private int frameCursor, frameRotor; // Compteur de frames pour le curseur de texte
       
       public ControllerMenu() {
         
         inputText = "";
-        imageLogo = loadImage( "../data/logo.png" ); // Charger l'image du logo
-        frameCursor = 0; // On met à 0 le compteur de frames
-        
+        imageLogo = loadImage( "../data/logo.png" ); // Charger les images du logo
+        imageLogo2 = loadImage( "../data/logo2.png" );
+        frameCursor = 0; // On met à 0 les compteur de frames
+        frameRotor = 4;
+
       }
       
       public void update() {
         
-        frameCursor++; // Le compteur tourne
+        frameCursor++; // L'heure tourne
         if ( frameCursor >= 32 )
           frameCursor = 0;
+          
+        frameRotor++;
+        if ( frameRotor >= 16 )
+          frameRotor = 0;
         
       }
         
@@ -43,8 +49,13 @@
         inputText = "";
       }
       
-      public PImage getLogoImage() {        
-        return imageLogo;
+      public PImage getLogoImage() {
+        
+        if ( frameRotor < 9 ) // Pour animer l'hélice de l'avion
+          return imageLogo;
+        else
+          return imageLogo2;
+        
       }
       
       public String getInputTextToDisplay() {

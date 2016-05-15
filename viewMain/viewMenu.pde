@@ -12,11 +12,13 @@
           
           controller.update(); // On mets à jour le contrôleur à chaque tour de boucle
           
-          image( controller.getLogoImage(), 100, 80 ); // Affichage du logo
+          tint( 250, 230, 255 ); // Affichage du logo
+          image( controller.getLogoImage(), 100, 80 );
+          noTint();
           
-          textAlign( LEFT, CENTER );
+          textAlign( LEFT, CENTER ); // Texte d'introduction
           fill( 220, 200, 255 );
-          text( "Where do you wanna to go today ?", 100, 280 ); // Texte d'introduction
+          text( "Where do you wanna go today ?", 100, 280 );
           
           text( controller.getInputTextToDisplay(), 100, 380 ); // Affichage de l'entrée clavier
           
