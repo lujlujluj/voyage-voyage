@@ -24,11 +24,17 @@
         
       public void loadDataForTag( String inputTag ) {
         
-        youtubeParser.loadNewSongForTag( inputTag ); // Charger un nouveau morçeau selon le hashtag entré par l'utilisateur
-        //link( youtubeParser.getSongURL() ); // Jouer la musique
-        
-        new ThreadLoadData( inputTag ).start(); // Démarrer un nouveau thread pour charger les données distantes
-        
+        try {
+          
+          youtubeParser.loadNewSongForTag( inputTag ); // Charger un nouveau morçeau selon le hashtag entré par l'utilisateur
+          //link( youtubeParser.getSongURL() ); // Jouer la musique
+          
+          new ThreadLoadData( inputTag ).start(); // Démarrer un nouveau thread pour charger les données distantes
+          
+        } catch ( ParserException e ) {
+          currentScreen = Screen.MENU;
+        }
+       
       }
       
       public float x1( int indexOfLine ) {
@@ -68,13 +74,24 @@
       
       public void run() {
         
-        ViewResults results = (ViewResults) views[Screen.RESULTS.ordinal()];
-      
-        results.loadDataForTag( inputTag ); // On démarre le chargement des données
+        try {
+          
+          ViewResults results = (ViewResults) views[Screen.RESULTS.ordinal()];
+          
+          results.loadDataForTag( inputTag ); // On démarre le chargement des données
+          
+          results.initWithNewData(); // On prépare les résultats pour l'affichage
+          
+          currentScreen = Screen.RESULTS; // Le chargement est fini, on passe sur la vue des résultats
         
-        results.initWithNewData(); // On prépare les résultats pour l'affichage
-        
-        currentScreen = Screen.RESULTS; // Le chargement est fini, on passe sur la vue des résultats
+        } catch ( ParserException e ) {
+          
+          ViewMenu menu = (ViewMenu) views[Screen.MENU.ordinal()];
+          
+          menu.enableErrorMessage(); // On revient sur le menu et l'on affiche un message d'erreur à l'utilisateur
+          currentScreen = Screen.MENU;
+          
+        }
       
       } 
       

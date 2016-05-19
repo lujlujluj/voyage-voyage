@@ -35,7 +35,7 @@
           controller.input();
         }
         
-        public void loadDataForTag( String inputTag ) {
+        public void loadDataForTag( String inputTag ) throws ParserException {
           controller.loadDataForTag( inputTag );
         }
         

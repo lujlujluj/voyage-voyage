@@ -1,13 +1,6 @@
 
     
-    //private ViewMenu menu; // Références sur les vues
-    //private ViewLoading loading;
-    //private ViewResults results;
-    
-    private View[] views;
-    
-    
-    
+    private View[] views; // Références sur les différentes vues qui composent le programme
     
     private PFont font; // Police d'affichage
     private float line1 = 200; // Paramètres bruit image
@@ -22,8 +15,7 @@
       size( 800, 600 ); // Configuration fenêtre
       noCursor();
       
-      views = new View[3];
-      
+      views = new View[3]; // On alloue le tableau
       views[Screen.MENU.ordinal()] = new ViewMenu(); // On instancie les vues
       views[Screen.LOADING.ordinal()]= new ViewLoading();
       views[Screen.RESULTS.ordinal()] = new ViewResults();
@@ -37,7 +29,7 @@
       
       background( 0 ); // Effacer le contenu la fenêtre
      
-      views[currentScreen.ordinal()].display();
+      views[currentScreen.ordinal()].display(); // Afficher la vue courante
       
       stroke( 20, 60 ); // Afficher l'effet de bruit / scintillement
       strokeWeight( 10 );
@@ -64,8 +56,6 @@
     public void keyPressed() {
       
       views[currentScreen.ordinal()].input();// Traiter les entrées clavier pour la vue courante
-          
-    
       
     }
     

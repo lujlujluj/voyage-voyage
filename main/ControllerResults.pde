@@ -65,22 +65,16 @@
         
       public void input() {
         
-        if ( key == 'q' || key == 'Q' ) { // La touche q permet de revenir au menu
-           
-           ViewMenu menu = (ViewMenu) views[Screen.MENU.ordinal()];
-           
-           menu.resetInput(); // On efface la saisie
-           currentScreen = Screen.MENU; // On passe sur l'écran du menu
-          
-        }
+        if ( key == 'q' || key == 'Q' ) // La touche q permet de revenir au menu
+           currentScreen = Screen.MENU;
         
       }
       
-      public void loadDataForTag( String inputTag ) {
+      public void loadDataForTag( String inputTag ) throws ParserException {
         
         instagramParser.loadNewPicturesForTag( inputTag ); // On charge des nouvelles données selon un hashtag
         twitterParser.loadNewTweetsForTag( inputTag );
-        
+
       }
         
       public void initWithNewData() {

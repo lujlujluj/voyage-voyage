@@ -8,49 +8,63 @@
         return tweets[indexOfTweet];
       }
   
-      public void loadNewTweetsForTag( String inputTag ) {
+      public void loadNewTweetsForTag( String inputTag ) throws ParserException {
         
         // On cherche le premier compte twitter selon un hashtag
         String lines[] = loadStrings( "https://twitter.com/search?f=users&q=" + inputTag );
         String[] m = match( join( lines, "" ), "js-action-profile-name\" href=\"/(.*?)\"" );
         
-        // On récupère les derniers tweets du compte
-        String lines2[] = loadStrings( "https://twitter.com/" + m[1] );
-        String[][] m2 = matchAll( join( lines2, "" ), "data-aria-label-part=\"0\">(.*?)(<a href=\"https.*?\" rel=\"nofollow\"|</p>)" );
-        
-        if ( m2 == null ) {
-      
+        if ( m == null ) {
+          
           println( "Impossible de récupérer les tweets." );
+          throw new ParserException();
           
         } else {
-      
-          println( m2.length + " tweet(s) récupéré(s)." );
+        
+          // On récupère les derniers tweets du compte
+          String lines2[] = loadStrings( "https://twitter.com/" + m[1] );
+          String[][] m2 = matchAll( join( lines2, "" ), "data-aria-label-part=\"0\">(.*?)(<a href=\"https.*?\" rel=\"nofollow\"|</p>)" );
           
-          tweets = new String[m2.length];
+          if ( m2 == null ) {
+            
+            println( "Impossible de récupérer les tweets." );
+            throw new ParserException();
+            
+          } else if ( m2.length < 10 ) { // Trop peu de tweets récupérées
+        
+            throw new ParserException();
           
-          // On garde uniquement le contenu du tweet en dehors des balises HTML
-          for ( int i = 0; i < m2.length; i++ ) {
+          } else {
+        
+            println( m2.length + " tweet(s) récupéré(s)." );
             
-            boolean dontCopy = false;
-            tweets[i] = "";
+            tweets = new String[m2.length];
             
-            for ( int l = 0; l < m2[i][1].length(); l++) {
+            // On garde uniquement le contenu du tweet en dehors des balises HTML
+            for ( int i = 0; i < m2.length; i++ ) {
               
-              if ( m2[i][1].charAt(l) == '<' )
-                dontCopy = true;
+              boolean dontCopy = false;
+              tweets[i] = "";
               
-              if ( !dontCopy )
-                tweets[i] += m2[i][1].charAt(l);
-              
-              if ( m2[i][1].charAt(l) == '>' )
-                dontCopy = false;
-              
-            }  
-              
+              for ( int l = 0; l < m2[i][1].length(); l++ ) {
+                
+                if ( m2[i][1].charAt(l) == '<' )
+                  dontCopy = true;
+                
+                if ( !dontCopy )
+                  tweets[i] += m2[i][1].charAt(l);
+                
+                if ( m2[i][1].charAt(l) == '>' )
+                  dontCopy = false;
+                
+              }  
+                
+            }
+            
           }
           
         }
-        
+      
       }
       
     }

@@ -1,9 +1,10 @@
 
 
-abstract class View {        
-        
-        abstract void display();
-        
-        abstract void input();
-
-} 
+    abstract class View {
+            
+      public abstract void display();
+      public abstract void input();
+    
+    }
+    
+    
