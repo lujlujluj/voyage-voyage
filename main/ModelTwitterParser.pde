@@ -1,13 +1,28 @@
-        
-    
+/**
+ * Modèle du parseur de Twitter
+ * On cherche le premier compte lié au tag 
+ * puis on récupère ses derniers tweets
+ */        
+               
     final class ModelTwitterParser {
       
       private String[] tweets; // Les tweets récupérés
       
+      /**
+       * Getter Tweets
+       * @import indexOfTweet
+       * @return tweets[indexOfTweet]
+       */
       public String getTweet( int indexOfTweet ) {
         return tweets[indexOfTweet];
       }
   
+      /**
+       * Recherche du premier compte lié au #
+       * puis récupération des derniers tweets
+       * via parsage d'une page HTML
+       * @import inputTag
+       */
       public void loadNewTweetsForTag( String inputTag ) throws ParserException {
         
         // On cherche le premier compte twitter selon un hashtag

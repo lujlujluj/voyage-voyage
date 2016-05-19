@@ -1,13 +1,26 @@
-        
+/**
+ * Modèle du parseur d'Instagram
+ * On récupère les dernières photos liées au #
+ */         
     
     final class ModelInstagramParser {
       
       private String[] picturesURL;
       
+      /**
+       * Getter URL photos
+       * @import indexOfPicture
+       * @return picturesURL[indexOfPicture] index de l'image
+       */
       public String getPictureURL( int indexOfPicture ) {
         return picturesURL[indexOfPicture];
       }
       
+      /**
+       * Récupération des dernières photos via 
+       * parsage d'une page htnl
+       * @import inputTag
+       */
       public void loadNewPicturesForTag( String inputTag ) throws ParserException {
         
         // On récupère les dernières photos selon le hashtag
@@ -47,6 +60,12 @@
       
     }
     
+    /**
+     * Classe ParserException dérivée de Exeption
+     * prévient l'utilisateur lorque le nombre de 
+     * résultats n'est pas suffisant pour 
+     * faire fonctionner l'application 
+     */
     class ParserException extends Exception { 
     
       public ParserException() {

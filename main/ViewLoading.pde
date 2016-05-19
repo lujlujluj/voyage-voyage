@@ -1,9 +1,14 @@
-
+/**
+ * Gestion de l'écran de chargement (Vue)
+ */
 
     final class ViewLoading extends View {
         
         private ControllerLoading controller; // Référence sur le contrôleur de l'écran de chargement
-       
+        
+        /**
+        * Constructeur
+        */
         public ViewLoading() {
           controller = new ControllerLoading(); // On instancie le contrôleur de l'écran de chargement
         }
@@ -38,6 +43,11 @@
           controller.input();
         }
         
+        /**
+         * Chargement des données récupérées grâce au tag 
+         * rentré par l'utilisateur
+         * @param inputTag - # tapé par l'utilisateur 
+         */
         public void loadDataForTag( String inputTag ) {
            controller.loadDataForTag( inputTag );
         }

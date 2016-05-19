@@ -1,16 +1,21 @@
-
+/**
+ * Gestion de l'écran d'accueil (Vue)
+ */
 
     final class ViewMenu extends View {
         
         private ControllerMenu controller; // Référence sur le contrôleur du menu
        
+        /**
+        * Constructeur
+        */
         public ViewMenu() {
           controller = new ControllerMenu(); // On instancie le contrôleur du menu
         }
         
         public void display() {
           
-          controller.update(); // On mets à jour le contrôleur à chaque tour de boucle
+          controller.update(); // On met à jour le contrôleur à chaque tour de boucle
           
           tint( 250, 230, 255 ); // Affichage du logo
           image( controller.getLogoImage(), 100, 80 );
@@ -40,10 +45,18 @@
           controller.input();
         }
         
+        
+        /**
+        * Effacer le mot clé rentré par l'utilisateur
+        */
         public void resetInput() {
           controller.resetInput();
         }
         
+        
+       /**
+        * Affiche du message d'erreur via le controleur 
+        */
         public void enableErrorMessage() {
           controller.enableErrorMessage(); 
         }

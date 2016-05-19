@@ -1,5 +1,4 @@
-
-    
+  
     private View[] views; // Références sur les différentes vues qui composent le programme
     
     private PFont font; // Police d'affichage
@@ -9,7 +8,10 @@
     
     private Screen currentScreen = Screen.MENU; // Écran courant
     
-    
+    /**
+     * Setup
+     * Instanciation des vues
+     */
     public void setup() {
      
       size( 800, 600 ); // Configuration fenêtre
@@ -21,10 +23,13 @@
       views[Screen.RESULTS.ordinal()] = new ViewResults();
       
       font = createFont( "../data/apple.ttf", 16 ); // Charger la police
-      textFont( font );
-      
+      textFont( font );      
     }
     
+    /**
+     * Draw
+     * Appelle la fonction display de la vue courante
+     */
     public void draw() {
       
       background( 0 ); // Effacer le contenu la fenêtre
@@ -53,6 +58,10 @@
       
     }
     
+    /**
+     * keyPressed
+     * Appelle la fonction input de la vue courante
+     */
     public void keyPressed() {
       
       views[currentScreen.ordinal()].input();// Traiter les entrées clavier pour la vue courante

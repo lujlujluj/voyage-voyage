@@ -1,4 +1,6 @@
-
+/**
+ * Controleur du menu/accueil 
+ */
 
     final class ControllerMenu {
       
@@ -9,6 +11,9 @@
       private final int MAX_INPUT = 20; // Taille maximale de l'entrée utilisateur
       private boolean inputError; // Doit-on afficher un message d'erreur ?
       
+      /**
+       * Constructeur  
+       */
       public ControllerMenu() {
         
         inputText = "";
@@ -20,7 +25,11 @@
         inputError = false; // Pas de message d'erreur au début
 
       }
-      
+
+      /**
+       * Mise à jour des données pour faire bouger 
+       * le curseur et l'hélice de l'avion
+       */
       public void update() {
         
         frameCursor++; // L'heure tourne
@@ -33,6 +42,10 @@
         
       }
         
+      /**
+       * Gestion des entrées utilisateurs 
+       * Saisie du #
+       */  
       public void input() {
         
         if ( keyCode == RETURN || keyCode == ENTER ) {
@@ -53,23 +66,41 @@
           inputText = inputText + key; // On ajoute la lettre à la chaine d'entrée
 
       }
-        
+      
+      /**
+       * Mise à zéro de l'input utilisateur
+       */  
       public void resetInput() {
         inputText = "";
       }
-      
+
+      /**
+       * Gestion de l'affichage du message d'erreur
+       * @return true - le msg est affiché
+       */ 
       public void enableErrorMessage() {
         inputError = true;
       }
       
+      /**
+       * Gestion de l'affichage du message d'erreur
+       * @return fasle - le msg n'est pas affiché
+       */       
       public void disableErrorMessage() {
         inputError = false;
       }
       
+      /**
+       * Gestion de l'affichage du message d'erreur
+       * @return inputError - texte du message d'erreur
+       */ 
       public boolean displayErrorMessage() {
         return inputError;
       }
       
+      /**
+       * Animation de l'hélice de l'avion
+       */             
       public PImage getLogoImage() {
         
         if ( frameRotor < 9 ) // Pour animer l'hélice de l'avion
@@ -79,6 +110,9 @@
         
       }
       
+      /**
+       * Animation du curseur
+       */
       public String getInputTextToDisplay() {
        
         if ( frameCursor < 16 ) // Le curseur clignote
@@ -87,7 +121,13 @@
           return inputText;
         
       }
-      
+
+      /**
+       * Permet de garder seulement les lettres
+       * du message tapé par l'utilisateur
+       * @import input - texte tapé par l'utilisateur
+       * @return # nettoyé
+       */
       private String cleanInput( String input ) {
        
         String output = "";  

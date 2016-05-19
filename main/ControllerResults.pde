@@ -1,4 +1,6 @@
-
+/**
+ * Controleur des résultats  
+ */
 
     final class ControllerResults {
       
@@ -13,6 +15,9 @@
       private int nbCharsToDisplay;
       private int frame;
       
+      /**
+       * Constructeur
+       */
       public ControllerResults() {
         
         instagramParser = new ModelInstagramParser(); // On instancie les parseurs
@@ -27,6 +32,11 @@
         
       }
       
+      /**
+       * Mise à jour des données 
+       * Nombre de rectangles 
+       * Nombre de caractères d'un tweet
+       */
       public void update() {
         
         nbRectsToDisplay += 5; // Le nombre de blocs de l'images à afficher augmente dans le temps
@@ -62,7 +72,12 @@
         }
         
       }
-        
+      
+      /**
+       * Gestion des entrées utilisateurs pendant
+       * l'affichage des résultats
+       * Touche Q pour quitter l'application
+       */
       public void input() {
         
         if ( key == 'q' || key == 'Q' ) // La touche q permet de revenir au menu
@@ -70,13 +85,22 @@
         
       }
       
+      /**
+       * Chargement des données récupérées grâce au tag 
+       * rentré par l'utilisateur
+       * @param inputTag
+       */
       public void loadDataForTag( String inputTag ) throws ParserException {
-        
+      
         instagramParser.loadNewPicturesForTag( inputTag ); // On charge des nouvelles données selon un hashtag
         twitterParser.loadNewTweetsForTag( inputTag );
 
       }
-        
+      
+      /**
+       * Initialisation avec de nouvelles données 
+       * Image et tweet et chargement de l'image
+       */      
       public void initWithNewData() {
         
         nextPictureIndex = 1; // On réinitialise l'affichage des images instagram
@@ -86,26 +110,46 @@
         nbCharsToDisplay = 0;
         frame = 0;
         
-        loadNewPicture(); // On charge une nouvelle image instagram
+        loadNewPicture(); // On charge une nouvelle image instagram  
         
       }
       
+      /**
+       * Getter Image courante à afficher
+       * @return pictureToDisplay
+       */       
       public PImage getPictureToDisplay() {
          return pictureToDisplay;
       }
       
+      /**
+       * Getter nombre de rectangles à afficher
+       * @return nbRectsToDisplay
+       */
       public int getNbRectsToDisplay() {
         return nbRectsToDisplay;
       }
       
+      /**
+       * Getter tweet courant
+       * @return twitterParser.getTweet( tweetIndex )
+       */
       public String getCurrentTweet() {
          return twitterParser.getTweet( tweetIndex );
       }
       
+      /**
+       * Getter nombre de caractères à afficher
+       * @return nbCharsToDisplay
+       */      
       public int getNbCharsToDisplay() {
          return nbCharsToDisplay;
       }
       
+      /**
+       * Chargement de la prochaine image et 
+       * application du sous-échantillonage
+       */ 
       private void loadNewPicture() {
         
         String pictureURL = instagramParser.getPictureURL( nextPictureIndex ); // On demande au modèle l'URL de la prochaine image
@@ -126,6 +170,10 @@
         
       }
       
+      /**
+       * Fonction de sous-echantillonage des images
+       * Détails dans le dossier
+       */      
       private void downsampling() {
   
         for ( int i = 0; i < 600; i += 5 ) { // On parcourt l'image par blocs de 5 x 8 pixels

@@ -1,9 +1,14 @@
-
+/**
+ * Gestion de l'écran de résultat
+ */
 
     final class ViewResults extends View {
         
         private ControllerResults controller; // Référence sur le contrôleur de l'écran des résultats
-       
+        
+        /**
+         * Constructeur
+         */
         public ViewResults() {
           controller = new ControllerResults(); // On instancie le contrôleur de l'écran des résultats
         }
@@ -35,10 +40,18 @@
           controller.input();
         }
         
+        /**
+         * Chargement des données récupérées grâce au tag 
+         * rentré par l'utilisateur
+         * @param inputTag - # tapé par l'utilisateur 
+         */
         public void loadDataForTag( String inputTag ) throws ParserException {
           controller.loadDataForTag( inputTag );
         }
         
+        /**
+         * Initialisation du controleur avec de nouvelles données
+         */
         public void initWithNewData() {
           controller.initWithNewData();
         }
