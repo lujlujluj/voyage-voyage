@@ -66,7 +66,9 @@
       public void input() {
         
         if ( key == 'q' || key == 'Q' ) { // La touche q permet de revenir au menu
-            
+           
+           ViewMenu menu = (ViewMenu) views[Screen.MENU.ordinal()];
+           
            menu.resetInput(); // On efface la saisie
            currentScreen = Screen.MENU; // On passe sur l'écran du menu
           

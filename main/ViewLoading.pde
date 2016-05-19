@@ -1,6 +1,6 @@
 
 
-    final class ViewLoading {
+    final class ViewLoading extends View {
         
         private ControllerLoading controller; // Référence sur le contrôleur de l'écran de chargement
        

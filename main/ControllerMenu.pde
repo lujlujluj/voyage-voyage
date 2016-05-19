@@ -32,6 +32,8 @@
         
         if ( keyCode == RETURN || keyCode == ENTER ) {
         
+          ViewLoading loading = (ViewLoading) views[Screen.LOADING.ordinal()];
+          
           loading.loadDataForTag( inputText ); // On lance le chargement des données
           currentScreen = Screen.LOADING; // On passe sur l'écran de chargement
           

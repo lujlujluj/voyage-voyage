@@ -67,6 +67,8 @@
       }
       
       public void run() {
+        
+        ViewResults results = (ViewResults) views[Screen.RESULTS.ordinal()];
       
         results.loadDataForTag( inputTag ); // On démarre le chargement des données
         

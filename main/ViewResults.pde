@@ -1,6 +1,6 @@
 
 
-    final class ViewResults {
+    final class ViewResults extends View {
         
         private ControllerResults controller; // Référence sur le contrôleur de l'écran des résultats
        

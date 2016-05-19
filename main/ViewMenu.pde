@@ -1,6 +1,6 @@
 
 
-    final class ViewMenu {
+    final class ViewMenu extends View {
         
         private ControllerMenu controller; // Référence sur le contrôleur du menu
        

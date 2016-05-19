@@ -1,8 +1,13 @@
 
     
-    private ViewMenu menu; // Références sur les vues
-    private ViewLoading loading;
-    private ViewResults results;
+    //private ViewMenu menu; // Références sur les vues
+    //private ViewLoading loading;
+    //private ViewResults results;
+    
+    private View[] views;
+    
+    
+    
     
     private PFont font; // Police d'affichage
     private float line1 = 200; // Paramètres bruit image
@@ -17,9 +22,11 @@
       size( 800, 600 ); // Configuration fenêtre
       noCursor();
       
-      menu = new ViewMenu(); // On instancie les vues
-      loading = new ViewLoading();
-      results = new ViewResults();
+      views = new View[3];
+      
+      views[Screen.MENU.ordinal()] = new ViewMenu(); // On instancie les vues
+      views[Screen.LOADING.ordinal()]= new ViewLoading();
+      views[Screen.RESULTS.ordinal()] = new ViewResults();
       
       font = createFont( "../data/apple.ttf", 16 ); // Charger la police
       textFont( font );
@@ -29,22 +36,8 @@
     public void draw() {
       
       background( 0 ); // Effacer le contenu la fenêtre
-       
-      switch( currentScreen ) { // Afficher l'écran courant
-        
-        case MENU:
-          menu.display();
-          break;
-
-        case LOADING:
-          loading.display();
-          break;
-
-        case RESULTS:
-          results.display();
-          break;
-          
-      }
+     
+      views[currentScreen.ordinal()].display();
       
       stroke( 20, 60 ); // Afficher l'effet de bruit / scintillement
       strokeWeight( 10 );
@@ -69,22 +62,10 @@
     }
     
     public void keyPressed() {
-     
-       switch( currentScreen ) { // Traiter les entrées clavier pour la vue courante
-        
-        case MENU:
-          menu.input();
-          break;
-
-        case LOADING:
-          loading.input();
-          break;
-
-        case RESULTS:
-          results.input();
-          break;
+      
+      views[currentScreen.ordinal()].input();// Traiter les entrées clavier pour la vue courante
           
-      }
+    
       
     }
     
